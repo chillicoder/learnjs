@@ -32,7 +32,13 @@ learnjs.flashElement = function(elem, content) {
 
 learnjs.buildCorrectFlash = function(problemNumber) {
   var correctFlash = learnjs.template('correct-flash');
-  correctFlash.find('a').attr('href','#problem-' + (problemNumber + 1));
+  var link = correctFlash.find('a');
+  if (problemNumber < learnjs.problems.length) {
+    link.attr('href', '#problem-' + (problemNumber + 1));
+  } else {
+    link.attr('href', '');
+    link.text("You're finished!");
+  }
   return correctFlash;
 }
 
