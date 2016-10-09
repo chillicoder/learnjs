@@ -13,6 +13,10 @@ learnjs.problems = [
   }
 ];
 
+learnjs.triggerEvent = function(name, args) {
+  $('.view-container>*').trigger(name,args);
+}
+
 learnjs.template = function(name) {
   return $('.templates .' + name).clone();
 }
