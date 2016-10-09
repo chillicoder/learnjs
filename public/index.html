@@ -10,7 +10,7 @@
     <script src='/vendor.js'></script>
     <script src='/app.js'></script>
     <style type="text/css" media="all">
-      body { margin-top: 30px; }
+      body { margin-top: 60px; }
       .templates { display: none; }
       .fixed-width-text { font-family: "Consolas","Courier New",monospace }
       .inline-list {
@@ -38,12 +38,19 @@
         background: #666;
       }
       .nav-container a { color: white; }
+      .navbar-padding {
+        padding-top: 7px;
+        display: inline-block;
+      }
+      .text-lg {
+        font-size: 32px;
+      }
     </style>
   </head>
   <body>
     <div class="markup">
       <div class="nav-container no-select fixed-top u-full-width">
-        <ul class="inline-list hover-links nav-list">
+        <ul class="inline-list hover-links nav-list six columns">
           <li><a class="text-lg" href="#">LearnJS</a></li>
           <li><a href="#problem-1">Start</a></li>
         </ul>
@@ -74,6 +81,9 @@
             </div>
           </form>
         </div>
+        <li class="skip-btn">
+          <a>Skip This Problem</a>
+        </li>
         <div class="correct-flash">
           <span>Correct!</span> <a>Next Problem</a>
         </div>
