@@ -30,6 +30,31 @@ describe('LearnJS', function() {
     expect(callback.calls.argsFor(0)[1]).toEqual('bar');
   });
 
+  describe('awsRefresh', function() {
+    var callbackArg, fakeCreds;
+
+    beforeEach(function() {
+      fakeCreds = jasmine.createSpyObj('creds',['refresh']);
+      fakeCreds.identityId = 'COGNITO_ID';
+      AWS.config.credentials = fakeCreds;
+      fakeCreds.refresh.and.callFake(function(cb) { cb(callbackArg); });
+    });
+
+    it('returns a promise that resolves on success', function(done) {
+      learnjs.awsRefresh().then(function(id) {
+        expect(fakeCreds.identityId).toEqual('COGNITO_ID');
+      }).then(done,fail);
+    });
+
+    it('rejects the promise on a failure', function(done) {
+      callbackArg = 'error';
+      learnjs.awsRefresh().fail(function(err) {
+        expect(err).toEqual('error');
+        done();
+      });
+    });
+  });
+
   describe('problem view', function() {
     var view;
     beforeEach(function() {
@@ -37,7 +62,7 @@ describe('LearnJS', function() {
     });
 
     it('has a title that includes the problem number', function() {
-      expect(view.text()).toEqual('Problem #1 Coming soon!');
+      expect(view.text()).toEqual('Problem #1');
     });
 
     it('shows the description', function() {
